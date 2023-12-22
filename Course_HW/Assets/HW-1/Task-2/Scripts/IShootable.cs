@@ -1,7 +1,8 @@
 using System;
-using UnityEngine;
 
 public interface IShootable
 {
+    bool CanShoot { get;}
+
     void Shoot();
 }

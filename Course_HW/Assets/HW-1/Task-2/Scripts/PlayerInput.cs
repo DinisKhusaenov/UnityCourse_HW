@@ -13,9 +13,14 @@ public class PlayerInput: MonoBehaviour
         _shootButton = shootButton;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        _shootButton?.onClick.AddListener(ShootButtonClick);
+        _shootButton.onClick.AddListener(ShootButtonClick);
+    }
+
+    private void OnDisable()
+    {
+        _shootButton.onClick.RemoveListener(ShootButtonClick);
     }
 
     private void ShootButtonClick()

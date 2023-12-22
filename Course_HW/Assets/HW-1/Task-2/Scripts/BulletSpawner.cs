@@ -13,11 +13,11 @@ public class BulletSpawner : MonoBehaviour
         _bulletSpeed = bulletSpeed;
     }
 
-    public void BulletCreation(Vector3 spawnPoint)
+    public void CreateBullet(Vector3 spawnPoint)
     {
-        var newBullet = Instantiate(_bulletPrefab, spawnPoint, transform.rotation);
-        newBullet.Speed = _bulletSpeed;
+        var bullet = Instantiate(_bulletPrefab, spawnPoint, transform.rotation);
+        bullet.Launch(_bulletSpeed);
 
-        Destroy(newBullet.gameObject, _destroyTime);
+        Destroy(bullet.gameObject, _destroyTime);
     }
 }

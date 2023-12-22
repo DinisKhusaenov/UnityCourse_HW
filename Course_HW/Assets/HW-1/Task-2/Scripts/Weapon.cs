@@ -23,6 +23,9 @@ public class Weapon : MonoBehaviour
 
     private void OnShootButtonClicked()
     {
-        _shootable.Shoot();
+        if (_shootable.CanShoot)
+            _shootable.Shoot();
+        else
+            Debug.Log("Патроны закончились");
     }
 }

@@ -8,7 +8,7 @@ public class ShootWithLimitedAmmunition : IShootable
 
     private BulletSpawner _bulletSpawner;
     private int _numberOfCartridges;
-    private List<Vector3> _spawnPoints; 
+    private List<Vector3> _spawnPoints;
 
     public ShootWithLimitedAmmunition(BulletSpawner bulletSpawner, int numberOfCartridges, int numberOfShoots, IEnumerable<Vector3> spawnPoints)
     {
@@ -16,17 +16,23 @@ public class ShootWithLimitedAmmunition : IShootable
         _numberOfCartridges = numberOfCartridges;
         NumberOfShoots = numberOfShoots;
         _spawnPoints = spawnPoints.ToList();
+
+        CanShoot = true;
     }
+
+    public bool CanShoot { get; private set; }
 
     public void Shoot()
     {
-        if (_numberOfCartridges >= NumberOfShoots)
+        if (_numberOfCartridges >= NumberOfShoots && CanShoot)
         {
             for (int i = 0; i < NumberOfShoots; i++)
             {
-                _bulletSpawner.BulletCreation(_spawnPoints[i]);
+                _bulletSpawner.CreateBullet(_spawnPoints[i]);
             }
             _numberOfCartridges -= NumberOfShoots;
+
+            if (_numberOfCartridges < NumberOfShoots) CanShoot = false;
         }
     }
 }

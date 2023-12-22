@@ -1,19 +1,16 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     private float _speed;
 
-    public float Speed
+    public void Launch(float speed)
     {
-        get { return _speed; }
-        set
-        {
-            if (value > 0)
-            {
-                _speed = value;
-            }
-        }
+        if (speed <= 0)
+            new ArgumentOutOfRangeException();
+
+        _speed = speed;
     }
 
     private void Update()

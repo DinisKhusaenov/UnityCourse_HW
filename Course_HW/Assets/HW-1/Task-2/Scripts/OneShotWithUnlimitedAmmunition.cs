@@ -11,8 +11,10 @@ public class OneShotWithUnlimitedAmmunition : IShootable
         _spawnPoint = spawnPoint;
     }
 
+    public bool CanShoot => true;
+
     public void Shoot()
     {
-        _bulletSpawner.BulletCreation(_spawnPoint);
+        _bulletSpawner.CreateBullet(_spawnPoint);
     }
 }
