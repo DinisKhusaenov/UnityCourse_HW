@@ -1,21 +1,15 @@
+using System;
 using UnityEngine;
 
 public class BallCatcher : MonoBehaviour
 {
-    private WinningCondition _winningCondition;
-
-    public void Initialization(WinningCondition winningCondition)
-    {
-        _winningCondition = winningCondition;
-    }
+    public event Action<Ball> BallCatched;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Ball ball))
         {
-            if (_winningCondition.IsWin(ball))
-                Debug.Log("WIN");
-
+            BallCatched?.Invoke(ball);
             Destroy(ball.gameObject);
         }
     }

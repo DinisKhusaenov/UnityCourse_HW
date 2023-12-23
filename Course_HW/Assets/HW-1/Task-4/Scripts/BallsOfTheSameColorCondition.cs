@@ -1,17 +1,24 @@
+using System;
 using System.Collections.Generic;
 
-public class BallsOfTheSameColorCondition : WinningCondition
+public class BallsOfTheSameColorCondition : VictoryCondition
 {
     private const int Counter = 1;
 
-    private Dictionary<string, int> _allBalls;
+    private Dictionary<ColorsEnum, int> _allBalls;
+    private Dictionary<ColorsEnum, int> _startBalls;
 
-    public BallsOfTheSameColorCondition(Dictionary<string, int> startBalls) : base(startBalls)
+    public override event Action Completed;
+
+    public BallsOfTheSameColorCondition(int numberOfAllBalls, BallCatcher ballCatcher, Dictionary<ColorsEnum, int> balls) : base(numberOfAllBalls, ballCatcher, balls)
     {
-        _allBalls = new Dictionary<string, int>();
+        _startBalls = balls;
+
+        _allBalls = new Dictionary<ColorsEnum, int>();
+        Catcher.BallCatched += OnBallCatched;
     }
 
-    public override bool IsWin(Ball ball)
+    public override void OnBallCatched(Ball ball)
     {
         if (_allBalls.ContainsKey(ball.GetColor()))
             _allBalls[ball.GetColor()] = _allBalls[ball.GetColor()] + Counter;
@@ -19,8 +26,11 @@ public class BallsOfTheSameColorCondition : WinningCondition
             _allBalls.Add(ball.GetColor(), Counter);
 
         if (_allBalls[ball.GetColor()] == _startBalls[ball.GetColor()] && _allBalls.Count == Counter)
-            _isWin = true;
+            Completed?.Invoke();
+    }
 
-        return _isWin;
+    public override void Dispose()
+    {
+        Catcher.BallCatched -= OnBallCatched;
     }
 }

@@ -2,5 +2,7 @@ using UnityEngine;
 
 public abstract class Ball: MonoBehaviour
 {
-    public abstract string GetColor();
+    protected ColorsEnum Color;
+
+    public abstract ColorsEnum GetColor();
 }

@@ -1,9 +1,9 @@
 public class WhiteBall : Ball
 {
-    private const string Color = "White";
+    private const ColorsEnum _color = ColorsEnum.White;
 
-    public override string GetColor()
+    public override ColorsEnum GetColor()
     {
-        return Color;
+        return _color;
     }
 }

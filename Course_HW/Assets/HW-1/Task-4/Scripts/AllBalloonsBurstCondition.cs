@@ -1,20 +1,30 @@
+using System;
 using System.Collections.Generic;
 
-public class AllBalloonsBurstCondition : WinningCondition
+public class AllBalloonsBurstCondition : VictoryCondition
 {
     private int _counter;
+    private int _numberOfAllBalls;
 
-    public AllBalloonsBurstCondition(int numberOfAllBalls) : base(numberOfAllBalls)
+    public override event Action Completed;
+
+    public AllBalloonsBurstCondition(int numberOfAllBalls, BallCatcher ballCatcher, Dictionary<ColorsEnum, int> balls) : base(numberOfAllBalls, ballCatcher, balls)
     {
+        _numberOfAllBalls = numberOfAllBalls;
+
+        Catcher.BallCatched += OnBallCatched;
     }
 
-    public override bool IsWin(Ball ball)
+    public override void OnBallCatched(Ball ball)
     {
         _counter++;
 
         if (_counter == _numberOfAllBalls)   
-            _isWin = true;
+            Completed?.Invoke();
+    }
 
-        return _isWin;
+    public override void Dispose()
+    {
+        Catcher.BallCatched -= OnBallCatched;
     }
 }
