@@ -1,0 +1,82 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Health",
+            "id": "a479afcb-7ac9-49d0-8326-63f5bbc64a57",
+            "actions": [
+                {
+                    "name": "Add",
+                    "type": "Button",
+                    "id": "3375bacb-6943-47b2-b748-d742ce945fca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reduce",
+                    "type": "Button",
+                    "id": "4483f761-c48f-4d48-bd92-55e55b60f313",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1d6bd624-3566-48c1-b1c2-4f9b3276dcc8",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Add",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cad618f-f154-4515-8f11-dc2bc0c3f920",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reduce",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Level",
+            "id": "2cc84263-2d81-4ad8-be24-581f244dd3dd",
+            "actions": [
+                {
+                    "name": "Increase",
+                    "type": "Button",
+                    "id": "e1f83ec1-ebbf-4dad-9225-32adbd1cac73",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89a705b0-0c94-4e08-96bf-e2975bdcf45b",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Increase",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
