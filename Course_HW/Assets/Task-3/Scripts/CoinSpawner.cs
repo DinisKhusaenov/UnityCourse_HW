@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,9 +12,9 @@ public class CoinSpawner
     private CoinFactory _coinFactory;
     private bool _isSpawnPointsEmpty;
 
-    public CoinSpawner(List<Vector3> spawnPoints, CoinFactory coinFactory)
+    public CoinSpawner(IEnumerable<Vector3> spawnPoints, CoinFactory coinFactory)
     {
-        _spawnPoints = spawnPoints;
+        _spawnPoints = spawnPoints.ToList();
         _coinFactory = coinFactory;
 
         _isSpawnPointsEmpty = false;
