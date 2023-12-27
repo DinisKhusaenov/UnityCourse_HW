@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Spawn",
+            "id": "feba46d6-750b-40b6-8480-b7a135fd7721",
+            "actions": [
+                {
+                    "name": "CreateCoin",
+                    "type": "Button",
+                    "id": "4ce01bc7-d4c8-4fe8-b038-396345a09c91",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "288d248b-ebd6-443f-adb0-d9b7f1655acd",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CreateCoin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

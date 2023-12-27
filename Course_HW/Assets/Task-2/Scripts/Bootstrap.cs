@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bootstrap : MonoBehaviour
+public class CoinExample : MonoBehaviour
 {
     [SerializeField] PlayerInput _input;
     [SerializeField] EnergyConfig _energyConfig;
