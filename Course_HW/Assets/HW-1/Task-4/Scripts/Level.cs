@@ -1,34 +1,43 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Level : MonoBehaviour
+public class Level: IDisposable
 {
+    public event Action LevelWin;
+
     private const int CountBalls = 1;
 
-    [SerializeField] private Ball[] _balls;
-    [SerializeField] BallCatcher _ballCatcher;
-
+    private List<Ball> _balls;
+    private Dictionary<ColorsEnum, int> _sortedBalls;
+    private BallCatcher _ballCatcher;
     private VictoryCondition _victoryCondition;
+    private GameLoadingData _gameLoadingData;
+    private BallSpawner _ballSpawner;
+    private ISceneLoadMediator _sceneLoadMediator;
 
-    private void Awake()
+    public Level(GameLoadingData gameLoadingData, BallCatcher ballCatcher, BallSpawner ballSpawner, ISceneLoadMediator sceneLoadMediator)
     {
-        _victoryCondition = new BallsOfTheSameColorCondition(_balls.Length, _ballCatcher, GetSortedBalls());
-    }
+        _gameLoadingData = gameLoadingData;
+        _ballCatcher = ballCatcher;
+        _ballSpawner = ballSpawner;
+        _sceneLoadMediator = sceneLoadMediator;
 
-    private void OnEnable()
-    {
+        _balls = _ballSpawner.Spawn();
+        _sortedBalls = GetSortedBalls();
+        _victoryCondition = GetVictoryCondition(_gameLoadingData.VictoryConditionEnum);
+
         _victoryCondition.Completed += OnGameWinned;
     }
 
-    private void OnDisable()
+    public void Dispose()
     {
         _victoryCondition.Completed -= OnGameWinned;
     }
+    public void OnMainMenuClick() => _sceneLoadMediator.GoToMainMenu();
 
-    private void OnGameWinned()
-    {
-        Debug.Log("Win");
-    }
+    private void OnGameWinned() => LevelWin?.Invoke();
+
+    public void OnRestartClick() => _sceneLoadMediator.GoToGameplay(_gameLoadingData);
 
     private Dictionary<ColorsEnum, int> GetSortedBalls()
     {
@@ -43,5 +52,20 @@ public class Level : MonoBehaviour
         }
 
         return sortedBalls;
+    }
+
+    private VictoryCondition GetVictoryCondition(VictoryConditionsEnum victoryConditionEnum)
+    {
+        switch (victoryConditionEnum)
+        {
+            case VictoryConditionsEnum.AllBaloonsBurst:
+                return new AllBalloonsBurstCondition(_balls.Count, _ballCatcher, _sortedBalls);
+
+            case VictoryConditionsEnum.BallsOfTheSameColor:
+                return new BallsOfTheSameColorCondition(_balls.Count, _ballCatcher, _sortedBalls);
+
+            default:
+                throw new ArgumentException(nameof(victoryConditionEnum));
+        }
     }
 }
