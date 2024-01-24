@@ -30,7 +30,7 @@ public class FallingState : AirbornState
             if (IsHorizontalInputZero())
                 StateSwitcher.SwitchState<IdlingState>();
             else
-                ChangeCurrentState();
+                StateSwitcher.SwitchState<WalkingState>();
         }
     }
 }

@@ -1,4 +1,4 @@
-public class FastRunnigState : GroundedState
+public class FastRunnigState : MoveState
 {
     private FastRunnigStateConfig _config;
 
@@ -17,8 +17,5 @@ public class FastRunnigState : GroundedState
     public override void Update()
     {
         base.Update();
-
-        if (IsHorizontalInputZero())
-            StateSwitcher.SwitchState<IdlingState>();
     }
 }

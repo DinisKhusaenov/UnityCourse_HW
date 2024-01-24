@@ -1,4 +1,3 @@
-using System;
 using UnityEngine.InputSystem;
 
 public class IdlingState : GroundedState
@@ -46,7 +45,7 @@ public class IdlingState : GroundedState
         if (IsHorizontalInputZero())
             return;
 
-        ChangeCurrentState();
+        StateSwitcher.SwitchState<WalkingState>();
     }
 
     private void SetWalkingState(InputAction.CallbackContext obj) => Data.CurrentMovementState = MovementStates.WalkingState;

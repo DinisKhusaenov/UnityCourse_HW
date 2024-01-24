@@ -12,8 +12,6 @@ public abstract class MovementState : IState
         StateSwitcher = stateSwitcher;
         _character = character;
         Data = data;
-
-        Data.CurrentMovementState = MovementStates.WalkingState;
     }
 
     protected PlayerInput Input => _character.Input;
@@ -52,25 +50,6 @@ public abstract class MovementState : IState
     protected virtual void RemoveInputActionsCallbacks() { }
 
     protected bool IsHorizontalInputZero() => Data.XInput == 0;
-
-    protected void ChangeCurrentState()
-    {
-        switch (Data.CurrentMovementState)
-        {
-            case MovementStates.WalkingState:
-                StateSwitcher.SwitchState<WalkingState>();
-                break;
-
-            case MovementStates.RunningState:
-                StateSwitcher.SwitchState<RunningState>();
-                break;
-
-            case MovementStates.FastRunningState:
-                StateSwitcher.SwitchState<FastRunnigState>();
-                break;
-
-        }
-    }
 
     private Quaternion GetRotationFrom(Vector3 velocity)
     {

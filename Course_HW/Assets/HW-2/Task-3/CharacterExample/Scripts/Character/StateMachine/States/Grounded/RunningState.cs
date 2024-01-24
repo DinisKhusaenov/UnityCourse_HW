@@ -1,4 +1,4 @@
-public class RunningState : GroundedState
+public class RunningState : MoveState
 {
     private RunningStateConfig _config;
 
@@ -24,8 +24,5 @@ public class RunningState : GroundedState
     public override void Update()
     {
         base.Update();
-
-        if (IsHorizontalInputZero())
-            StateSwitcher.SwitchState<IdlingState>();
     }
 }
